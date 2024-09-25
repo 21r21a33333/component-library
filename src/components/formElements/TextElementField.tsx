@@ -69,6 +69,7 @@ const TextField: React.FC<TextFieldProps> = ({
   return (
     <div className="relative mb-4">
       <input
+        id={name}
         ref={inputRef}
         value={formData[name] || ""}
         placeholder={placeholder}

@@ -5,8 +5,16 @@ interface FormContextType {
   formData: Record<string, string>;
   handleChange: (name: string, value: string) => void;
   handleSubmit: (callback: (data: Record<string, any>) => void) => void;
-  addRef: (name: string, ref: React.RefObject<HTMLInputElement>) => void; // Add ref method
-  refs: Record<string, React.RefObject<HTMLInputElement>>; // Store refs
+  addRef: (
+    name: string,
+    ref: React.RefObject<
+      HTMLInputElement | HTMLDivElement | HTMLTextAreaElement
+    >
+  ) => void; // Add ref method
+  refs: Record<
+    string,
+    React.RefObject<HTMLInputElement | HTMLDivElement | HTMLTextAreaElement>
+  >; // Store refs
   getRef: () => any; // Get ref method
 }
 
@@ -42,7 +50,7 @@ export const FormProvider: React.FC<FormProviderProps> = ({ children }) => {
   // Handle form submission
   const handleSubmit = (callback: (data: Record<string, any>) => void) => {
     let hasError = false;
-    console.log("Form Data: ", refs);
+    console.log("Form Data: ", formData);
     // Check for errors in form data
     for (const key in formData) {
       if (key.endsWith("_error") && formData[key]) {
